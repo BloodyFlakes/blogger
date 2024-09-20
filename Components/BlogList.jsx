@@ -1,6 +1,6 @@
-import { blog_data } from '@/Assets/assets';
-import BlogItem from './BlogItem';
 import { useState } from 'react';
+import BlogItem from './BlogItem';
+import { blog_data } from '@/Assets/assets';
 
 function BlogList() {
   const [menu, setMenu] = useState('All');
@@ -39,6 +39,7 @@ function BlogList() {
           .filter((blog) => (menu === 'All' ? true : blog.category === menu))
           .map((item, index) => (
             <BlogItem
+              id={item.id}
               title={item.title}
               category={item.category}
               description={item.description}
