@@ -13,7 +13,12 @@ function Layout({ children }) {
         <div className='flex flex-col w-full'>
           <div className='flex items-center justify-between w-full py-3 max-h-[60px] px-12 border-b border-black'>
             <h3 className='font-medium'>Admin Panel</h3>
-            <Image src={assets.profile_icon} alt='profile-icon' width={40} />
+            <Image
+              src={assets.me}
+              alt='profile-icon'
+              width={50}
+              className='border border-gray-600 rounded-full'
+            />
           </div>
           {children}
         </div>

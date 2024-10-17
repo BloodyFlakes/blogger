@@ -4,6 +4,7 @@
 
 import { assets, blog_data } from '@/Assets/assets';
 import Footer from '@/Components/Footer';
+import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -11,13 +12,13 @@ import { useEffect, useState } from 'react';
 function page({ params }) {
   const [data, setData] = useState(null);
 
-  const fetchBlogData = () => {
-    for (let i = 0; i < blog_data.length; i++) {
-      if (Number(params.id) === blog_data[i].id) {
-        setData(blog_data[i]);
-        break;
-      }
-    }
+  const fetchBlogData = async () => {
+    const response = await axios.get('/api/blog', {
+      params: {
+        id: params.id,
+      },
+    });
+    setData(response.data);
   };
 
   useEffect(() => {
@@ -38,7 +39,7 @@ function page({ params }) {
         <div className='my-24 text-center'>
           <h1 className='text-2xl sm:text-5xl font-semibold max-w-[700px] mx-auto'>{data.title}</h1>
           <Image
-            src={data.author_img}
+            src={data.authorImg}
             alt='author'
             width={60}
             height={60}
@@ -57,7 +58,7 @@ function page({ params }) {
         />
         <h1 className='my-8 text-[26px] font-semibold'>Introduction:</h1>
         <p>{data.description}</p>
-        <h3 className='my-5 text-[18px] font-semibold'>Step 1: Self-Reflection and Goal Setting</h3>
+        {/* <h3 className='my-5 text-[18px] font-semibold'>Step 1: Self-Reflection and Goal Setting</h3>
         <p className='my-3'>
           Before you can manage your lifestyle, you must have a clear understanding of what you want
           to achieve. Start by reflection on your values, aspirations, and long-term goals.
@@ -88,7 +89,7 @@ function page({ params }) {
         <p className='my-3'>
           Before you can manage your lifestyle, you must have a clear understanding of what you want
           to achieve. Start by reflection on your values, aspirations, and long-term goals.
-        </p>
+        </p> */}
         <div className='my-24'>
           <p className='my-4 font-semibold text-black'>Share this article on social media</p>
           <div className='flex'>
